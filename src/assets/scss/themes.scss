@@ -2,15 +2,14 @@
 @import "../scss/config/minimal/bootstrap.scss";
 @import "../scss/config/minimal/app.scss";
 @import "../scss/config/minimal/custom.scss";
-@import"./shepherd.css";
+@import "./shepherd.css";
 @import "./mermaid.min.css";
 
-//RTL 
+//RTL
 // @import "../scss/rtl/components-rtl";
 // @import "../scss/rtl/layouts-rtl";
 // @import "../scss/rtl/plugins-rtl";
 // @import "../scss/rtl/pages-rtl";
-
 
 //Rigthsidebar offcanvas
 .offcanvas-header-dark {
@@ -91,8 +90,8 @@ body {
 
   .fc {
     .fc-toolbar {
-      >* {
-        >* {
+      > * {
+        > * {
           float: none;
         }
       }
@@ -125,9 +124,7 @@ body {
 //   max-height: 43px !important;
 // }
 
-
-@each $color,
-$value in $theme-colors {
+@each $color, $value in $theme-colors {
   .simplebar-track-#{$color} {
     .simplebar-scrollbar:before {
       background: $value !important;
@@ -223,7 +220,6 @@ $value in $theme-colors {
 }
 
 .react-dual-listbox {
-
   input:disabled,
   select:disabled {
     background-color: $input-disabled-bg !important;
@@ -252,11 +248,9 @@ input:-webkit-autofill:active {
   -webkit-text-fill-color: var(--#{$prefix}body-color) !important;
 }
 
-
 //datatables
 .kbunWL,
 .ddeqMG {
-
   .cFDtZf,
   .efrTRK {
     color: $table-color;
