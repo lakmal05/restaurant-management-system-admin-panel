@@ -1,9 +1,8 @@
-const URL_REMOTE = `http://84.46.249.96:4001`;
-//http://84.46.249.96/tea-and-soul-web/public/oauth/token
+const URL_REMOTE = `http://localhost:4008`;
 const conf = {
   serverUrl: URL_REMOTE,
   basePath: `public`,
-  redirect: `http://84.46.249.96:4001`,
+  redirect: `http://localhost:4008`,
 };
 
 export default conf;

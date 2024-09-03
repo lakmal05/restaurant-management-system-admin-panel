@@ -1,53 +1,53 @@
 import ApiService from "./apiService";
 
-export async function getAllStaff(currentPage) {
+export async function getAllBranches(currentPage) {
   const apiObject = {};
   apiObject.method = "GET";
   apiObject.authentication = true;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = `api/staff/find-all?perPage=${15}&page=${currentPage}`;
+  apiObject.endpoint = `api/store-locator/find-all?perPage=${15}&page=${currentPage}`;
   apiObject.body = null;
   return await ApiService.callApi(apiObject);
 }
 
-export async function createStaff(data) {
+export async function createBranch(data) {
   const apiObject = {};
   apiObject.method = "POST";
   apiObject.authentication = true;
   apiObject.urlencoded = false;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = "api/staff/create";
+  apiObject.endpoint = "api/store-locator/create";
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
 }
 
-export async function updateStaff(staffId, data) {
+export async function updateBranch(storeId, data) {
   const apiObject = {};
   apiObject.method = "PUT";
   apiObject.authentication = true;
   apiObject.urlencoded = false;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = ``;
+  apiObject.endpoint = `api/store-locator/update/${storeId}`;
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
 }
 
-export async function deleteStaff(staffId) {
+export async function deleteBranch(storeId) {
   const apiObject = {};
-  (apiObject.method = "DELETE"),
-    (apiObject.authentication = true),
-    (apiObject.isWithoutPrefix = false);
-  apiObject.endpoint = ``;
+  apiObject.method = "DELETE",
+  apiObject.authentication = true,
+  apiObject.isWithoutPrefix = false;
+  apiObject.endpoint = `api/store-locator/delete/${storeId}`;
   apiObject.body = null;
   return await ApiService.callApi(apiObject);
 }
 
-export async function staffFiltration(data, currentPage) {
+export async function getAllBranchesFiltration(data, currentPage) {
   const apiObject = {};
-  (apiObject.method = "GET"),
-    (apiObject.authentication = true),
-    (apiObject.isWithoutPrefix = false);
-  apiObject.endpoint = `api/staff/find-all?name=${data.name}&email=${data.email}&roleId=${data.role}&status=${data.status}&perPage=${15}&page=${currentPage}`;
+  apiObject.method = "GET",
+  apiObject.authentication = true,
+  apiObject.isWithoutPrefix = false;
+  apiObject.endpoint = `api/store-locator/find-all?name=${data?.name}&address=${data?.address}&perPage=${15}&page=${currentPage}`;
   apiObject.body = null;
   return await ApiService.callApi(apiObject);
 }

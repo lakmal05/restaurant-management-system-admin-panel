@@ -5,7 +5,7 @@ export async function upload(data) {
   apiObject.method = "POST";
   apiObject.authentication = true;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = "";
+  apiObject.endpoint = "api/files/upload";
   apiObject.multipart = true;
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
