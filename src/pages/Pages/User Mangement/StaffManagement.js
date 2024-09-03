@@ -25,8 +25,8 @@ import debounce from "lodash/debounce";
 import { StaffTableColumns } from "../../../common/tableColumns";
 import StaffModel from "../../../Components/Common/modal/StaffModal";
 
-const UserManagement = () => {
-  document.title = "Staff Management| Address Shop";
+const StaffManagement = () => {
+  document.title = "Staff Management| Restaurant";
 
   const [staffTableList, setStaffTableList] = useState([]);
   const [isAddStaffModalOpen, setIsAddStaffModalOpen] = useState(false);
@@ -87,15 +87,15 @@ const UserManagement = () => {
       .getAllStaff(currentPage)
       .then((res) => {
         const formattedData = res.data.records.map((record) => ({
-          name: record.user.firstName + " " + record.user.lastName,
-          email: record.user.email,
-          status: record.user.status,
-          contactNo: record.user.staff?.contactNo
-            ? record.user.staff?.contactNo
+          name: record?.user?.firstName + " " + record?.user?.lastName,
+          email: record?.user?.email,
+          status: record?.user?.status,
+          contactNo: record?.user?.staff?.contactNo
+            ? record?.user?.staff?.contactNo
             : "empty",
-          role: record.user?.role,
-          roleName: record.user.role.name,
-          file: record.user?.file,
+          role: record?.user?.role,
+          roleName: record?.user?.role?.name,
+          file: record?.user?.file,
           action: (
             <>
               <Button
@@ -127,6 +127,7 @@ const UserManagement = () => {
       .catch((err) => {
         popUploader(dispatch, false);
         handleError(err);
+        console.log(err);
       });
   };
 
@@ -150,15 +151,15 @@ const UserManagement = () => {
         .staffFiltration(data, currentPage)
         .then((res) => {
           const formattedData = res.data.records.map((record) => ({
-            name: record.user.firstName + " " + record.user.lastName,
-            email: record.user.email,
-            status: record.user.status,
-            contactNo: record.user.staff?.contactNo
-              ? record.user.staff?.contactNo
+            name: record?.user?.firstName + " " + record?.user?.lastName,
+            email: record?.user?.email,
+            status: record?.user?.status,
+            contactNo: record?.user?.staff?.contactNo
+              ? record?.user?.staff?.contactNo
               : "empty",
-            role: record.user?.role,
-            roleName: record.user.role.name,
-            file: record.user?.file,
+            role: record?.user?.role,
+            roleName: record?.user?.role?.name,
+            file: record?.user?.file,
             action: (
               <>
                 <Button
@@ -439,4 +440,4 @@ const UserManagement = () => {
   );
 };
 
-export default UserManagement;
+export default StaffManagement;
