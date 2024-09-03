@@ -4,7 +4,7 @@ import { Dropdown, DropdownMenu, DropdownToggle, Form } from 'reactstrap';
 
 //import images
 import logoSm from "../assets/images/logo-sm.png";
-import logoDark from "../assets/images/logo-dark.png";
+import logoDark from "../assets/images/logo/logo.png";
 import logoLight from "../assets/images/logo-light.png";
 
 //import Components

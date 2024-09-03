@@ -31,7 +31,7 @@ const ComingSoon = () => {
         }
     }
 
-    document.title="Coming Soon | Velzon - React Admin & Dashboard Template";
+    document.title="Coming Soon | Taste Budz ";
     return (
         <React.Fragment>
             <ParticlesAuth>
