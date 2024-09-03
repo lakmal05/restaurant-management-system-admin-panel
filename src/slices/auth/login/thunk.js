@@ -11,7 +11,7 @@ import { loginService } from "../../../service/auth";
 import * as authService from "../../../service/auth";
 import * as constant from "../../../common/constants";
 import Cookies from "js-cookie";
-import { customToastMsg } from "../../../common/commonFunctions";
+import { customToastMsg, handleError, popUploader } from "../../../common/commonFunctions";
 
 export const loginUser = (user, history) => async (dispatch) => {
   try {
@@ -29,11 +29,11 @@ export const loginUser = (user, history) => async (dispatch) => {
       .then((res) => {
         let pp = [];
         const response = res?.data;
-        Cookies.set(constant.ACCESS_TOKEN, response?.token);
-        Cookies.set(constant.REFRESH_TOKEN, response?.refreshToken);
-        Cookies.set(constant.Expire_time, response?.tokenExpires);
+        Cookies.set(constant.ACCESS_TOKEN, response?.token?.access_token);
+        Cookies.set(constant.REFRESH_TOKEN, response?.token?.refresh_token);
+        // Cookies.set(constant.Expire_time, response?.tokenExpires);
         sessionStorage.setItem("authUser", JSON.stringify(response?.user));
-        let permissionEncode = response?.user?.rolePermissions;
+        let permissionEncode = response?.permissions;
         permissionEncode.map((p, index) => {
           pp.push(btoa(p));
         });
@@ -41,6 +41,7 @@ export const loginUser = (user, history) => async (dispatch) => {
         window.location.href = "/dashboard";
         setTimeout(() => {}, 2000);
         customToastMsg("Login successfully", 1);
+        popUploader(dispatch, false);
       })
       .catch((c) => {
         popUploader(dispatch, false);
