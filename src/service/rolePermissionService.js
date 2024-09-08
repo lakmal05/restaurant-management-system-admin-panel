@@ -26,7 +26,7 @@ export async function createRole(data) {
   apiObject.authentication = true;
   apiObject.urlencoded = false;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = "";
+  apiObject.endpoint = "api/role/create";
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
 }
@@ -37,7 +37,7 @@ export async function updateRole(roleId, data) {
   apiObject.authentication = true;
   apiObject.urlencoded = false;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = ``;
+  apiObject.endpoint = `api/role/update/${roleId}`;
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
 }
@@ -47,7 +47,7 @@ export async function deleteRole(roleId, data) {
   (apiObject.method = "PUT"),
     (apiObject.authentication = true),
     (apiObject.isWithoutPrefix = false);
-  apiObject.endpoint = ``;
+  apiObject.endpoint = `api/role/update/${roleId}`;
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
 }
@@ -57,7 +57,7 @@ export async function getRoleByIdWithOrWithoutPermission(id, withPermissions) {
   apiObject.method = "GET";
   apiObject.authentication = true;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = ``;
+  apiObject.endpoint = `api/role/find-by-id/${id}?withPermission=${withPermissions}`;
   apiObject.body = null;
   return await ApiService.callApi(apiObject);
 }
@@ -68,7 +68,7 @@ export async function assignRolePermission(data) {
   apiObject.authentication = true;
   apiObject.urlencoded = false;
   apiObject.isWithoutPrefix = false;
-  apiObject.endpoint = "";
+  apiObject.endpoint = "api/role-permission/assigne";
   apiObject.body = data;
   return await ApiService.callApi(apiObject);
 }

@@ -34,7 +34,7 @@ const CustomImageUploader = ({
           : {}
       );
 
-      const ids = initialData.map((data) => data.id);
+      const ids = initialData.map((data) => data?.id);
       setFileList(transformedData);
       setUploadedFileIds(ids);
     } else {

@@ -128,9 +128,9 @@ const ReservationManagement = () => {
           .updateReservationsStatus(reservationId, status)
           .then((res) => {
             status === "ACCEPT"
-              ? customToastMsg("Product successfully accepted", 1)
+              ? customToastMsg("Reservation successfully accepted", 1)
               : status === "REJECTED"
-              ? customToastMsg("Product successfully rejected", 1)
+              ? customToastMsg("Reservation successfully rejected", 1)
               : "",
               popUploader(dispatch, false);
             loadAllReservations();

@@ -115,7 +115,7 @@ const Login = (props) => {
                                 <div className="text-center text-white-50">
                                     <div>
                                         <Link to="/" className="d-inline-block auth-logo">
-                                            <img src={logoLight} alt="" height="200"/>
+                                            <img src={logoLight} alt="" height="150"/>
                                         </Link>
                                     </div>
                                     <p className="mt-4 text-primary fs-15 fw-medium">Restaurant Admin Dashboard</p>

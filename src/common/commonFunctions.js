@@ -7,9 +7,10 @@ import withReactContent from "sweetalert2-react-content";
 import "../assets/scss/components/customeToastify.scss";
 import { Upload, message, Card as AntCard } from "antd";
 export const MySwal = withReactContent(Swal);
-
+import * as constant from "./constants";
+ 
 import Cookies from "js-cookie";
-
+ 
 const ToastContent = ({ title, body, assets }) => (
   <Fragment>
     <ToastContainer
@@ -24,11 +25,11 @@ const ToastContent = ({ title, body, assets }) => (
       pauseOnHover
       theme="light"
     />
-
+ 
     <ToastContainer />
   </Fragment>
 );
-
+ 
 export const customToastMsg = (e, type, c) => {
   let msgType = "info";
   let assets = {
@@ -54,7 +55,7 @@ export const customToastMsg = (e, type, c) => {
       icon: <Check color={"#10df10"} size={15} />,
     };
   }
-
+ 
   toast[msgType](e, {
     position: "top-right",
     autoClose: true,
@@ -66,11 +67,11 @@ export const customToastMsg = (e, type, c) => {
     theme: "light",
   });
 };
-
+ 
 export const isEmpty = (str) => {
   return !str || str.length === 0;
 };
-
+ 
 export const customSweetAlert = (
   text,
   type,
@@ -88,7 +89,7 @@ export const customSweetAlert = (
   } else if (type === 3) {
     msgType = "warning";
   }
-
+ 
   return MySwal.fire({
     title,
     text,
@@ -117,7 +118,7 @@ export const customSweetAlert = (
     }
   });
 };
-
+ 
 export const customSweetAlertResolve = (
   text,
   type,
@@ -134,7 +135,7 @@ export const customSweetAlertResolve = (
   } else if (type === 1) {
     msgType = "success";
   }
-
+ 
   return MySwal.fire({
     title,
     text,
@@ -163,25 +164,57 @@ export const customSweetAlertResolve = (
     }
   });
 };
-
+ 
 export const handleError = (c) => {
   c?.response?.data?.message
     ? customToastMsg(c?.response?.data?.message[0], 0)
     : customToastMsg("Sorry! Try again later", 0);
- 
 };
-
+ 
 export const countDescription = (description) => {
   if (description === "") return 0;
   // Remove HTML tags using regular expression
   var strippedString = description.replace(/(<([^>]+)>)/gi, "");
-
+ 
   // Count actual characters
   var characterCount = strippedString.length;
-
+ 
   return characterCount;
 };
-
+ 
 export const popUploader = (dispatch, val) => {
   dispatch({ type: "IS_LOADER", value: { isLoader: val, type: 0 } });
+};
+ 
+export const checkPermission = (permissionType) => {
+  // console.log(permissionType, "3265655");
+  if (JSON.parse(Cookies?.get(constant.PERMISSION) === undefined)) {
+    // window.href = "/login";
+    // process.env.PUBLIC_URL + "/logout"
+    window.location.href = "/logout";
+  } else {
+    let currentPermissions = JSON.parse(Cookies?.get(constant.PERMISSION));
+    //   let PERMISSION =Cookies?.get('PERMISSION')=== undefined ?[]:JSON.parse(Cookies?.get('PERMISSION'));
+    let pp = [];
+    let permissionDecode = currentPermissions;
+ 
+    if (permissionDecode != []) {
+      permissionDecode?.map((p, index) => {
+        pp.push(atob(p));
+      });
+    }
+    // console.log(pp,'filter details :', permissionType)
+    let isHavePermission = false;
+ 
+    if (Array.isArray(permissionType)) {
+      // If permissionType is an array, check if any element is included in pp
+      isHavePermission = permissionType.some((type) => pp.includes(type));
+    } else {
+      // If permissionType is not an array, check if it's included in pp
+      isHavePermission = pp.includes(permissionType);
+    }
+ 
+    //console.log(isHavePermission)
+    return isHavePermission;
+  }
 };

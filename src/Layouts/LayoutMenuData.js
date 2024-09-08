@@ -1,9 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+ 
 //Import Icons
 import FeatherIcon from "feather-icons-react";
-
+import { checkPermission } from "../common/commonFunctions";
+import {
+  BRANCH,
+  CATEGORY,
+  CUSTOMER,
+  GALLERY,
+  INQUIRY,
+  OFFERS,
+  ORDER,
+  PAYMENT,
+  PERMISSIONASSIGN,
+  PRODUCT,
+  REPORT,
+  RESERVATION,
+  ROLE,
+  SERVICE,
+  STAFF,
+} from "../common/permissionDetails";
+ 
 const Navdata = () => {
   const history = useNavigate();
   //state data
@@ -19,11 +37,11 @@ const Navdata = () => {
   const [isIcons, setIsIcons] = useState(false);
   const [isMaps, setIsMaps] = useState(false);
   const [isMultiLevel, setIsMultiLevel] = useState(false);
-
+ 
   // Pages
   const [isLanding, setIsLanding] = useState(false);
   const [iscurrentState, setIscurrentState] = useState("Dashboard");
-
+ 
   function updateIconSidebar(e) {
     if (e && e.target && e.target.getAttribute("subitems")) {
       const ul = document.getElementById("two-column-menu");
@@ -37,7 +55,7 @@ const Navdata = () => {
       });
     }
   }
-
+ 
   useEffect(() => {
     document.body.classList.remove("twocolumn-panel");
     if (iscurrentState !== "Dashboard") {
@@ -58,7 +76,7 @@ const Navdata = () => {
     if (iscurrentState !== "AdvanceUi") {
       setIsAdvanceUi(false);
     }
-
+ 
     if (iscurrentState !== "Forms") {
       setIsForms(false);
     }
@@ -100,7 +118,7 @@ const Navdata = () => {
     isMaps,
     isMultiLevel,
   ]);
-
+ 
   const menuItems = [
     {
       id: "dashboard",
@@ -119,7 +137,7 @@ const Navdata = () => {
       label: "Master Data",
       isHeader: true,
     },
-    {
+    checkPermission([CATEGORY]) && {
       id: "apps",
       label: "Category Management",
       icon: <FeatherIcon icon="grid" className="icon-dual" />,
@@ -132,7 +150,7 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
-    {
+    checkPermission([BRANCH]) && {
       id: "branchManagement",
       label: "Branch Management",
       icon: <FeatherIcon icon="archive" className="icon-dual" />,
@@ -145,7 +163,8 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
-    {
+    // checkPermission([SERVICE]) &&
+     {
       id: "serviceManagement",
       label: "Service Management",
       icon: <FeatherIcon icon="layers" className="icon-dual" />,
@@ -158,6 +177,7 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
+    // checkPermission([OFFERS]) &&
     {
       id: "OffersManagement",
       label: "Offers Management",
@@ -175,7 +195,7 @@ const Navdata = () => {
       label: "Pages",
       isHeader: true,
     },
-    {
+    checkPermission([PRODUCT]) && {
       id: "apps",
       label: "Products",
       icon: <FeatherIcon icon="codesandbox" className="icon-dual" />,
@@ -188,7 +208,7 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
-    {
+    checkPermission([ORDER]) && {
       id: "orderManagement",
       label: "Order Management",
       icon: <FeatherIcon icon="shopping-cart" className="icon-dual" />,
@@ -229,7 +249,7 @@ const Navdata = () => {
         },
       ],
     },
-    {
+    checkPermission([RESERVATION]) && {
       id: "reservationManagement",
       label: "Table Reservations",
       icon: <FeatherIcon icon="bookmark" className="icon-dual" />,
@@ -242,8 +262,8 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
-
-    {
+ 
+    checkPermission([PAYMENT]) && {
       id: "apps",
       label: "Payment Management",
       icon: <FeatherIcon icon="dollar-sign" className="icon-dual" />,
@@ -284,6 +304,7 @@ const Navdata = () => {
         },
       ],
     },
+    // checkPermission([GALLERY]) &&
     {
       id: "apps",
       label: "Gallery Management",
@@ -297,7 +318,7 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
-    {
+    checkPermission([STAFF]) &&{
       id: "userManagement",
       label: "Users Management",
       icon: <FeatherIcon icon="users" className="icon-dual" />,
@@ -323,7 +344,7 @@ const Navdata = () => {
           },
           stateVariables: isApps,
         },
-        {
+        checkPermission([CUSTOMER]) && {
           id: "customerManagement",
           label: "Customer Management",
           icon: <FeatherIcon icon="users" className="icon-dual" />,
@@ -338,6 +359,7 @@ const Navdata = () => {
         },
       ],
     },
+    // checkPermission([ROLE,PERMISSIONASSIGN]) &&
     {
       id: "apps",
       label: "Role and Permissions",
@@ -351,7 +373,7 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
-    {
+    checkPermission([INQUIRY]) &&{
       id: "inquiryManagement",
       label: "Inquiry Management",
       icon: <FeatherIcon icon="send" className="icon-dual" />,
@@ -364,6 +386,7 @@ const Navdata = () => {
       },
       stateVariables: isApps,
     },
+    // checkPermission([REPORT]) &&
     {
       id: "reportsManagement",
       label: "Reports Management",
